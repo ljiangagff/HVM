@@ -184,7 +184,7 @@ my_model = Model(ld.vocab,
                  },
                  text_encoder_type=TEXT_ENCODER_TYPE).to(DEVICE)
 
-my_validate = DecodingVal(ld, DEVICE, LOG_DIR, category='test')
+my_validate = DecodingVal(ld, DEVICE, LOG_DIR, category='validate')
 my_validate.load_data()
 my_trainset = ld.load_data('train', DEVICE, BATCH_SIZE)
 trainer = FR_Training(my_model, my_validate, my_trainset, LR)

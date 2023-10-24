@@ -6,7 +6,7 @@ from validate.val import DecodingVal
 from models.model import Model
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--device', type=str, default="4")
+parser.add_argument('--device', type=str, default="0")
 opt = parser.parse_args()
 DEVICE_ID = int(opt.device)
 
