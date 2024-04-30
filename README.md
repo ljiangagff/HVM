@@ -28,7 +28,7 @@ The log and checkpoints directory are made by you with mkdir command.
 
 If the source code and data are organized as listed , there is no need to input parameters where all the parameters are set to default. Simply run the following command. You need to assign the spare gpu id for training.
 
-```js
+```
 cd $WORK_DIR/HVM && python training.py --device=$YOUR_DEVICE_ID
 ```
 
@@ -52,7 +52,7 @@ im2tex100k
 
 Run the following command: 
 
-```js
+```
 cd $WORK_DIR/HVM && python test.py --device=$YOUR_DEVICE_ID
 ```
 
