@@ -15,7 +15,7 @@ DATASET_NAME = opt.dataset
 
 IMAGE_DIR = f"../{DATASET_NAME}/test/result/images/"
 DECODED_DIR = f"../{DATASET_NAME}/test/result/decoded/"
-RESULT_DIR = f"../{DATASET_NAME}/test/measure_nougat.json"
+RESULT_DIR = f"../{DATASET_NAME}/test/measure.json"
 
 
 def bleu(tf_tokens, decoded_tokens, weights=(0.25, 0.25, 0.25, 0.25)):

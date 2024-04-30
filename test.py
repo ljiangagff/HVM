@@ -7,18 +7,22 @@ from models.model import Model
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--device', type=str, default="7")
+parser.add_argument('--data_dir', type=str, default="../im2tex100k/data")
+parser.add_argument('--label_dir', type=str, default="../im2tex100k/seqs")
+parser.add_argument('--model_dir', type=str, default="../im2tex100k/test/ckpt/")
+parser.add_argument('--result_dir', type=str, default="../im2tex100k/test/result/decoded/")
+parser.add_argument('--log_dir', type=str, default="../im2tex100k/test/log")
+
 opt = parser.parse_args()
 DEVICE_ID = int(opt.device)
+DATA_DIR = opt.data_dir
+LABEL_DIR = opt.label_dir
+MODEL_DIR = opt.model_dir
+RESULT_DIR = opt.result_dir
+LOG_DIR = opt.log_dir
 
 torch.cuda.set_device(DEVICE_ID)
 DEVICE = torch.device('cuda')
-
-DATA_DIR = '../im2tex100k/data'
-LABEL_DIR = '../im2tex100k/seqs'
-MODEL_DIR = '../im2tex100k/test/ckpt/'
-RESULT_DIR = "../im2tex100k/test/result/decoded/"
-LOG_DIR = '../im2tex100k/test/log'
-# LOG_DIR = os.path.normpath(os.path.join(os.getcwd(), '../test_log'))
 
 
 ld = LD.Loader(data_dir=DATA_DIR, label_dir=LABEL_DIR)

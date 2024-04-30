@@ -44,7 +44,6 @@ im2tex100k
     |-- ckpt
         |-- HVM-B.pth
         |-- HVM-L.pth
-    |-- log
     |-- result
         |-- decoded
         |-- images

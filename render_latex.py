@@ -6,10 +6,9 @@ from PIL import Image
 
 import concurrent.futures
 
-TEST_DIR = "../im2tex100k/test/result/decoded/alpha0.7.json"
+TEST_DIR = "../im2tex100k/test/result/decoded/HVM-B.json"
 TRUTH_IMAGE_DIR = "../im2tex100k/test/result/images/truth/"
 TRUTH_TEX_DIR = "../im2tex100k/test/result/tex/truth/"
-
 
 DECODED_DIR = "../im2tex100k/test/result/decoded/"
 OUTPUT_DIR = "../im2tex100k/test/result/images/"
@@ -114,23 +113,28 @@ def output_an_latex(seq_content, filename, tex_dir, image_dir):
     except:
         pass
 
+def ensure_mkdir(directory):
+    if not os.path.exists(directory):
+        os.mkdir(directory)
+
 
 def render_result_collection(file):
     data = read_latex_strings(DECODED_DIR+file)
     out_tex_dir = TEX_DIR+file[:-5]
     out_image_dir = OUTPUT_DIR+file[:-5]
     print(f"Compiling latex of {file}")
-    if not os.path.exists(out_tex_dir):
-        os.mkdir(out_tex_dir)
-    if not os.path.exists(out_image_dir):
-        os.mkdir(out_image_dir)
+    ensure_mkdir(out_tex_dir)
+    ensure_mkdir(out_image_dir)
     with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
-        futures = [executor.submit(
-            render_an_image_pair, d, out_tex_dir, out_image_dir) for d in data]
+        futures = [executor.submit(render_an_image_pair, d, out_tex_dir, out_image_dir) for d in data]
     print(f"Rendering {file} completed")
 
 
 if __name__ == "__main__":
+    ensure_mkdir(TRUTH_IMAGE_DIR)
+    ensure_mkdir(TRUTH_TEX_DIR)
+    render_truth()
+
     all_files = os.listdir(DECODED_DIR)
     files = []
     for file in all_files:
@@ -140,6 +144,3 @@ if __name__ == "__main__":
     with concurrent.futures.ProcessPoolExecutor(max_workers=16) as executor:
         futures = [executor.submit(render_result_collection, file) for file in files]
 
-# if __name__ == "__main__":
-#     render_truth()
-#     pass
